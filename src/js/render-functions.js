@@ -46,23 +46,31 @@ export function renderGallery(images) {
   });
 
   
-  lightbox.on('open', () => {
-    const lightboxOverlay = document.querySelector('.sl-overlay');
+  lightbox.on('show.simplelightbox', function () {
+    const currentImage = document.querySelector('.sl-image');
     
-    if (lightboxOverlay && !document.querySelector('.sl-close')) {
-      const closeButton = document.createElement('button');
-      closeButton.classList.add('sl-close');
-      closeButton.innerHTML = '✖'; 
-      closeButton.addEventListener('click', () => {
-        lightbox.close(); 
-      });
-      lightboxOverlay.appendChild(closeButton); 
+    if (currentImage) {
+      currentImage.classList.remove('sl-image'); 
+    }
+  });
+
+  
+  lightbox.on('next.simplelightbox', function () {
+    const currentImage = document.querySelector('.sl-image');
+    if (currentImage) {
+      currentImage.classList.remove('sl-image'); 
+    }
+  });
+
+  lightbox.on('prev.simplelightbox', function () {
+    const currentImage = document.querySelector('.sl-image');
+    if (currentImage) {
+      currentImage.classList.remove('sl-image'); 
     }
   });
 
   lightbox.refresh(); 
 }
-
 
 export function clearGallery() {
   if (gallery) {
